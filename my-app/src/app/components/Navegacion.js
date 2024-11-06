@@ -1,12 +1,13 @@
 
 import Image from "next/image";
-import "../stylesheets/Navegacion.css"
+import "../stylesheets/Navegacion.css";
+import Link from "next/link";
 
 
 function Navegacion() {
     return(
         <div className="navegacion">
-        <a
+        <Link
           href="/"
         >
           <Image
@@ -17,9 +18,9 @@ function Navegacion() {
             height={20}
           />
           Store
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+        </Link>
+        <Link
+          href="/carrito"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -31,8 +32,8 @@ function Navegacion() {
             height={30}
           />
           Shippings
-        </a>
-        <a
+        </Link>
+        <Link
           href="https://github.com/isalamajor"
           target="_blank"
           rel="noopener noreferrer"
@@ -45,7 +46,7 @@ function Navegacion() {
             height={20}
           />
           Go to my github →
-        </a>
+        </Link>
       </div>
     );
 }
