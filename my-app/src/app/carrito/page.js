@@ -4,6 +4,7 @@ import Image from 'next/image';
 import styles from "../page.module.css";
 import Navegacion from '../components/Navegacion.js';
 import '../stylesheets/CheckOut.css';
+import PaymentForm from '../components/PaymentForm';
 
 export default function Home() {
     const { cartItems, calculateTotal } = useCart();
@@ -45,6 +46,10 @@ export default function Home() {
                     <hr></hr>
                     <div className='price-section'><h4>Total</h4> <p>{total} €</p></div>
                 </div>
+            </div>
+
+            <div className='checkout-form'>
+                <PaymentForm price={total}></PaymentForm>
             </div>
         <Navegacion />
         </main>
