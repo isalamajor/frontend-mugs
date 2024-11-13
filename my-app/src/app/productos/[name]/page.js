@@ -10,7 +10,6 @@ import MySlider from "@/app/components/MySlider";
 import { CartProvider, useCart } from '../../context/ContextoCarrito';
 import BurgerCart from "@/app/components/BurgerCart";
 
-
 export default function Home() {
     const { name } = useParams();
     const product_name = decodeURIComponent(name);
@@ -23,7 +22,9 @@ export default function Home() {
         
         <BurgerCart pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }
         ></BurgerCart>
-        <div className={`${styles.page} page-wrap`} >
+
+        <div className="page-wrap">
+        <div className={`${styles.page} `} >
           <header className={styles.header}>
             <a href="/">
               <Image className={styles.headerlogo} src="/img/logo.png" width={600} height={100} alt="Logotipo"/>
@@ -74,6 +75,7 @@ export default function Home() {
           
           <Navegacion />
           
+        </div>
         </div>
         
       </div>

@@ -49,10 +49,54 @@ export const CartProvider = ({ children }) => {
         setCartItems([]);
     };
 
+    const lowerQuantity = (productId) => {
+        setCartItems((prevItems) => {
+            return prevItems.map((item) => {
+                if (item.id === productId) {
+                    if (item.quantity === 1) {
+                        removeFromCart(productId);
+                        return item; 
+                    } else {
+                        return { ...item, quantity: item.quantity - 1 };
+                    }
+                }
+                return item;
+            });
+        });
+    };
+
+
+    const increaseQuantity = (productId) => {
+        setCartItems((prevItems) => {
+            return prevItems.map((item) =>
+                item.id === productId
+                    ? { ...item, quantity: item.quantity + 1 }
+                    : item
+            );
+        });
+    };
+
+    const changeQuantity = (productId, newQuantity) => {
+        setCartItems((prevItems) =>
+            prevItems.map((item) =>
+                item.id === productId
+                    ? { ...item, quantity: Math.max(1, parseInt(newQuantity)) || 1 } 
+                    : item
+            )
+        );
+    };
+
+    const calculateTotal = () => {
+        return cartItems.reduce((total, item) => {
+            return total + (item.price * item.quantity);
+        }, 0);
+    
+    }
+
     return (
         /* El Provider de un Contexto define el contexto compartido (estado y funciones) a los que los componentes dentro del Provider pueden acceder */
         <CartContext.Provider
-            value={{ cartItems, addToCart, removeFromCart, clearCart }}
+            value={{ cartItems, addToCart, removeFromCart, clearCart, lowerQuantity, increaseQuantity, changeQuantity, calculateTotal }}
         >
             {children}
         </CartContext.Provider>

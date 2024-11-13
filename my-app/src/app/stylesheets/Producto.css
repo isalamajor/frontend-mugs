@@ -1,7 +1,7 @@
 .contenedor-producto {
     width: 20rem;
     height: 28rem;
-    background-color: #e76df7;
+    background-color: var(--pinky);
     border-radius: 1%;
 }
 
@@ -10,7 +10,7 @@
         object-fit:inherit;
         transform: scale(1.2);
     }
-    background-color: #cc1acc;
+    background-color: var(--darkpinky);
 }
 
 .contenedor-texto {
@@ -41,7 +41,7 @@
 
 h2 {
     font-size: 1.2rem;
-    color:  #cc1acc; 
+    color:  var(--darkpinky); 
     text-shadow: 
     -1px -1px 0px white,  
      1px -1px 0px white,
@@ -58,4 +58,3 @@ h2 {
 .descripcion-producto {
     font-size: 0.9rem;
 }
-
