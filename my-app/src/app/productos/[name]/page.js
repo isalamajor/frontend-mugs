@@ -7,8 +7,18 @@ import { useParams } from 'next/navigation';
 import '../../stylesheets/ProductoPage.css';
 import React, { useRef } from 'react';
 import MySlider from "@/app/components/MySlider";
-import { CartProvider, useCart } from '../../context/ContextoCarrito';
+import { useCart } from '../../context/ContextoCarrito';
 import BurgerCart from "@/app/components/BurgerCart";
+
+/* Add a break (paragraph) every time there's \n in the list of products long descriptions*/
+const formatDescription = (description) => {
+  return description.split('\n').map((line, index) => {
+    if (line === '') {
+      return <br key={index} />; 
+    }
+    return <p key={index}>{line}</p>; 
+  });
+};
 
 export default function Home() {
     const { name } = useParams();
@@ -18,8 +28,8 @@ export default function Home() {
     
 
     return (
-      <div className="outer-container">
-        
+      <div className={"outer-container"}>
+  
         <BurgerCart></BurgerCart>
 
         <div className="page-wrap">
@@ -39,10 +49,7 @@ export default function Home() {
               
               <div className="contenedor-taza">
                 <div className="imagenes-tazas">
-                  <MySlider
-                  producto={producto}>
-                  </MySlider>
-
+                  <MySlider producto={producto}></MySlider>
                   <Image
                   className="imagen-taza"
                   src={`/img/${producto.pic}`}
@@ -53,7 +60,7 @@ export default function Home() {
                 </div>
 
                 <div className="contenedor-texto-taza">
-                  <div>{producto.long_description}</div>
+                  <div className="descripcion-producto">{formatDescription(producto.long_description)}</div>
                   <p className="precio-taza">{producto.price} €</p>
                   <div className="btn-add" onClick={() => {addToCart(producto); toggleMenu();}}>
                     <div>Add to</div> 
@@ -72,9 +79,9 @@ export default function Home() {
             </div>
           </main>
           
-          <Navegacion />
-          
+          <Navegacion />          
         </div>
+        <div className={styles.author}> All rights reserved - Isabel Hernández Barrio</div>
         </div>
         
       </div>

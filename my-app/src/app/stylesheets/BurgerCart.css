@@ -1,7 +1,7 @@
 .cart-menu {
     position: fixed;
     top: 0;
-    right: -100%; /* Oculto fuera de pantalla inicialmente */
+    right: -100%; /* Initially hidden outside the screen */
     width: 30%;
     height: 100vh;
     background-color: var(--yellowy);
@@ -9,23 +9,20 @@
     flex-direction: column;
     padding: 3rem 4rem;
     color: black;
-    transition: right 0.55s ease; /* Animación de apertura */
+    transition: right 0.55s ease; 
     z-index: 1000;
     align-items: flex-start;
     justify-content: flex-start;
     text-align: left;
-
-    overflow-y: auto; /* Habilita el scroll vertical si el contenido es demasiado grande */
-    scrollbar-width: thin; /* Opcional: Hace la barra de desplazamiento más delgada */
-    scrollbar-color: var(--darkpinky) var(--yellowy); /* Opcional: Personaliza el color de la barra */
-    
+    overflow-y: auto; /* Vertical Scroll */
+    scrollbar-width: thin;
 }
-
 
 
 .cart-menu.open {
-    right: 0; /* Se muestra el menú cuando tiene la clase .open */
+    right: 0; /* Show menu */
 }
+
 
 .cart-header {
     display: flex;
@@ -34,15 +31,18 @@
     width: 100%;
 }
 
+
 .close-btn {
     color: black;
-    font-size: 1800;
+    margin-bottom: 20%;
 }
+
 
 h1 {
     text-align: left;
     margin-bottom: 1.5rem;
 }
+
 
 .close-btn {
     background: none;
@@ -51,25 +51,6 @@ h1 {
     cursor: pointer;
 }
 
-.open-icon {
-    background-color: var(--yellowy);
-    border-radius: 10%;
-    padding: 0.7rem;
-}
-
-.open-icon img {
-    color: red;
-}
-
-.burger-cart {
-    width: 35%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 3rem 1rem;
-    align-items: flex-end;
-    color: black;
-}
 
 .cart-items {
     display: flex;
@@ -79,6 +60,7 @@ h1 {
     width: 100%;
 
 }
+
 
 .item-container {
     display: flex;
@@ -96,6 +78,7 @@ h1 {
     border-radius: 2%;
 }
 
+
 .cart-item {
     display: flex;
     flex-direction: column;
@@ -104,11 +87,13 @@ h1 {
     text-align: left;
 }
 
+
 .item-price {
     font-weight: bold;
     margin-bottom: 5px;
     text-align: left;
 }
+
 
 .item-operations {
     display: flex;
@@ -116,6 +101,7 @@ h1 {
     column-gap: 1rem;
     user-select: none;
 }
+
 
 .plus-minus {
     height: 100%;
@@ -126,6 +112,7 @@ h1 {
     align-items: center;
 }
 
+
 .plus-minus-container {
     width: 4rem;
     height: 1.5rem;
@@ -135,8 +122,9 @@ h1 {
     border-radius: 2%;
 }
 
+
 .plus-minus-btn {
-    background-color: #c9c9c8;
+    background-color: var(--lightgreyish);
     width: 30%;
     height: 100%;
     padding: 5%;
@@ -145,10 +133,12 @@ h1 {
     justify-content: center;
 }
 
+
 .left {
     border-top-left-radius: 15%;
     border-bottom-left-radius: 15%;
 }
+
 
 .right {
     border-top-right-radius: 15%;
@@ -157,7 +147,7 @@ h1 {
 
 
 .plus-minus-num {
-    background-color: #f9f7e0;
+    background-color: var(--whitey);
     height: 100%; 
     width: 2rem;
     display: flex;
@@ -165,8 +155,9 @@ h1 {
     justify-content: center;
 }
 
+
 .delete-btn-container {
-    background-color: #C70039;
+    background-color: var(--redy);
     color: white;
     border-radius: 15%;
     display: flex;
@@ -177,10 +168,12 @@ h1 {
 
 }
 
+
 .delete-btn {
     width: 70%;
     height: 70%;
 }
+
 
 .cart-btn {
     width: 100%;
@@ -197,33 +190,49 @@ h1 {
     padding: 0.5rem;
 }
 
+
 .cart-btn {
-    background-color: #306030;
+    background-color: var(--greeny);
 }
+
 
 .cart-btn:hover {
-    background-color: #34a634;
+    background-color: var(--lightgreeny);
 }
+
 
 .cart-btn:active {
-    background-color: #306030;
+    background-color: var(--greeny);
     transform: scale(0.95); 
 }
+
 
 .empty-cart {
-    background-color: #656564;
+    background-color: var(--greyish);
 }
+
 
 .empty-cart:hover {
-    background-color: #483e46;
+    background-color: var(--darkgreyish);
 }
 
+
 .empty-cart:active {
-    background-color: #656564; 
+    background-color: var(--greyish); 
     transform: scale(0.95); 
 }
+
 
 .price-section {
     font-size: 110%;
     text-align: right;
+}
+
+
+@media (max-width: 600px) {
+    .cart-menu {
+      width: 100%;
+      padding: 2rem;
+      }
+
 }

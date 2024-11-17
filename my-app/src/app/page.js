@@ -8,6 +8,7 @@ import BurgerCart from "@/app/components/BurgerCart";
 
 export default function Home() {
   return (
+    <div>
       <div className={styles.page}>
 
         <header className={styles.header}>
@@ -27,7 +28,7 @@ export default function Home() {
           <div className={styles.grid}>
             {lista_productos.map((producto, index) => (
             <Producto
-              key={index} // Usa un índice único para la clave
+              key={index}
               name={producto.name}
               description={producto.description}
               price={producto.price}
@@ -38,6 +39,9 @@ export default function Home() {
         </main>
         
         <Navegacion></Navegacion>
+      
       </div>
+      <div className={styles.author}> All rights reserved - Isabel Hernández Barrio</div>
+      </div>  
   );
 }

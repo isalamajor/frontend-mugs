@@ -1,4 +1,3 @@
-// BurgerCart.js
 "use client";
 import { useCart } from '@/app/context/ContextoCarrito';
 import { FaRegTrashAlt, FaPlus, FaMinus } from 'react-icons/fa';
@@ -6,14 +5,14 @@ import Link from "next/link";
 import Image from 'next/image';
 import '../stylesheets/BurgerCart.css';
 import { useEffect, useRef } from 'react';
+import { IoClose } from "react-icons/io5";
 
 function BurgerCart() {
   const { cartItems, removeFromCart, clearCart, isMenuOpen, closeMenu, calculateTotal, increaseQuantity, lowerQuantity } = useCart();
-  const menuRef = useRef(null); // Referencia al menú
-
   const subtotal = calculateTotal();
 
-  // Controla el comportamiento de la clase de apertura/cierre del menú
+  // To check where menu is, in order to close it when we click outside of it
+  const menuRef = useRef(null); 
   useEffect(() => {
     const cartMenu = menuRef.current;
     if (isMenuOpen) {
@@ -23,7 +22,7 @@ function BurgerCart() {
     }
   }, [isMenuOpen]);
 
-  // Cierra el menú si se hace clic fuera de él
+  // Close menu when clicking outside of it
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -41,7 +40,10 @@ function BurgerCart() {
   return (
     <>
       <div className="cart-menu" ref={menuRef}>
-        <h1 className="cart-header">Your order</h1>
+        <div className="cart-header">
+          <h1>Your order</h1>
+          <IoClose className="close-btn" onClick={closeMenu}></IoClose>
+        </div>
         <ul className="cart-items">
           {cartItems.map((item) => (
             <li className='item-container' key={item.id}>

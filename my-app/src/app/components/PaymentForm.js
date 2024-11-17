@@ -9,11 +9,11 @@ export default function CheckoutForm() {
   const [contactData, setContactData] = useState({ email: '', phone: '', message: '' });
   const [errors, setErrors] = useState({});
 
-  // Validación global para todos los campos
+  // Validate inputs
   const validateAll = () => {
     const newErrors = {};
 
-    // Validación de Shipping
+    // Shipping inputs
     if (!shippingData.name) newErrors.name = "Name is required.";
     if (!shippingData.lastname) newErrors.lastname = "Last name is required.";
     if (!shippingData.country) newErrors.country = "Country is required.";
@@ -27,7 +27,7 @@ export default function CheckoutForm() {
       newErrors.postalCode = "Postal code must be 5 digits.";
     }
 
-    // Validación de Payment
+    // Payment inputs
     if (!paymentData.cardNumber || paymentData.cardNumber.length !== 16) {
       newErrors.cardNumber = "Card number must be 16 digits.";
     }
@@ -36,7 +36,7 @@ export default function CheckoutForm() {
       newErrors.cvv = "CVV must be 3 digits.";
     }
 
-    // Validación de Contact
+    // Contact inputs
     if (!contactData.email) newErrors.email = "Email is required.";
     if (!contactData.phone) newErrors.phone = "Phone number is required.";
 

@@ -1,6 +1,6 @@
 .contenedor-producto {
-    width: 20rem;
-    height: 28rem;
+    max-width: 20rem;
+    max-height: 28rem;
     background-color: var(--pinky);
     border-radius: 1%;
     display: inline-block;
@@ -8,6 +8,7 @@
     transition: transform 0.3s ease;
     position: relative;
 }
+
 
 .contenedor-producto:hover {
     .imagen-producto {
@@ -24,9 +25,11 @@
     
 }
 
+
 .contenedor-producto .btn-add-store:hover {
     pointer-events: all; /* Prioriza el botón sobre otros elementos */
 }
+
 
 .contenedor-texto {
     
@@ -39,6 +42,7 @@
     row-gap: 0.7rem;
 }
 
+
 .contenedor-imagen {
     position: relative;
     overflow: hidden;
@@ -49,9 +53,11 @@
     transition: transform 0.3s ease; /* Agrega una animación suave */
 }
 
+
 .contenedor-producto:hover .imagen-producto {
     transform: scale(1.1); /* Amplía la imagen ligeramente al pasar el cursor */
 }
+
 
 .imagen-producto {
     width: 100%;
@@ -60,8 +66,9 @@
     transition: transform 0.3s ease;
 }
 
+
 .mug-name{
-    font-size: 1.2rem;
+    font-size: 120%;
     color:  var(--darkpinky); 
     text-shadow: 
     -1px -1px 0px white,  
@@ -70,15 +77,17 @@
      1px  1px 0px white;
 }
 
+
 .precio-producto {
     color:  #f7f77d ;
-    font-size: 1.5rem;
+    font-size: 120%;
     font-weight: 100;
 }
 
 .descripcion-producto {
-    font-size: 0.9rem;
+    font-size: 90%;
 }
+
 
 .btn-add-store {
     background-color: var(--yellowy);
@@ -102,16 +111,19 @@
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
+
 .contenedor-producto:hover .btn-add-store {
     visibility: visible;
     opacity: 1;
 }
+
 
 .btn-add-store:hover{
     background-color: var(--darkyellowy);
     color: var(--darkpinky);
 
 }
+
 
 .btn-add-store:active {
     background-color: var(--pinky);
@@ -121,6 +133,14 @@
     }
 }
 
+
 .icon-cart {
     color: var(--darkpinky);
+}
+
+
+@media (max-width: 350px) {
+    .btn-add-store {
+        font-size: 80%;
+    }
 }

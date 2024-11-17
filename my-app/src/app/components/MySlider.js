@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
@@ -9,13 +9,6 @@ import '../stylesheets/MySlider.css';
 import { SlArrowUp, SlArrowDown } from "react-icons/sl";
 
 
-/*function obtenerProductos(product_name) {
-  const tresProductos = lista_productos.filter(product => product.name !== product_name);
-  const productosShuffled = tresProductos.sort(() => 0.5 - Math.random());
-  return productosShuffled.slice(0, 3);
-}
-const productosSugeridos = obtenerProductos(props.producto);
-*/
 const CustomArrow = ({ direction, onClick }) => {
   return (
     <div
@@ -28,10 +21,10 @@ const CustomArrow = ({ direction, onClick }) => {
         transform: "translateX(-50%)",
         zIndex: 1,
         cursor: "pointer",
-        color: "#000", // Cambia el color según necesites
+        color: "#000", 
       }}
     >
-      {direction === "next" ? <SlArrowDown/>  : <SlArrowUp/>} {/* Puedes usar íconos o imágenes aquí */}
+      {direction === "next" ? <SlArrowDown/> : <SlArrowUp/>}
     </div>
   );
 };
@@ -39,6 +32,21 @@ const CustomArrow = ({ direction, onClick }) => {
 
 function MySlider(props) {
   const productos_slider = lista_productos.filter(elem => elem !== props.producto);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 600);
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize(); 
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const settings = {
     dots: false,
     infinite: true,
@@ -56,26 +64,28 @@ function MySlider(props) {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          vertical: false, // Cambia a horizontal en pantallas pequeñas
           verticalSwiping: false,
         },
       },
     ],
   };
 
+  if (isSmallScreen) {
+    return null; 
+  }
 
   return (
     <Slider {...settings} className="contenedor-slider" >
-        {productos_slider.map((product) => (
-            <Link className='sugerido 'key={product.name} href={`/productos/${encodeURIComponent(product.name)}`}>
-                <Image
-                src={`/img/${product.pic}`}
-                alt={product.name}
-                width={155}
-                height={155}
-                />
-            </Link>
-        ))}
+      {productos_slider.map((product) => (
+        <Link className='sugerido' key={product.name} href={`/productos/${encodeURIComponent(product.name)}`}>
+          <Image
+            src={`/img/${product.pic}`}
+            alt={product.name}
+            width={155}
+            height={155}
+          />
+        </Link>
+      ))}
     </Slider>
   );
 }

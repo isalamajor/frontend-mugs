@@ -14,6 +14,7 @@ export default function Home() {
     const total = parseFloat((subtotal + shipping + taxed_price).toFixed(2));
 
     return (
+    <div>
         <div className={`${styles.page} `} >
           <header className={styles.header}>
             <a href="/">
@@ -21,41 +22,42 @@ export default function Home() {
             </a>
           </header>
 
-        <main className={styles.main}>
-        <Navegacion />
-        <div className='grid'>
-            <div className='summary-container'>
-                <h2 className='title-summary'>Summary</h2>
-                <ul>
+          <main className={styles.main}>
+            <Navegacion />
+            <div className='grid'>
+                <div className='summary-container'>
+                  <h2 className='title-summary'>Summary</h2>
+                  <ul>
                     {cartItems.map((item) => (
-                        <li className='cart-item-with-pic' key={item.id}>
-                            <div><Image
-                            className="item-pic"
-                            src={`/img/${item.pic}`}
-                            alt={item.name}
-                            width={50}
-                            height={50}
-                            /></div>
-                            <div className='item-price'>{item.name} ({item.quantity}) - {item.price * item.quantity}€ </div>
-                        </li>
+                      <li className='cart-item-with-pic' key={item.id}>
+                        <div><Image
+                        className="item-pic"
+                        src={`/img/${item.pic}`}
+                        alt={item.name}
+                        width={50}
+                        height={50}
+                        /></div>
+                        <div className='item-price'>{item.name} ({item.quantity}) - {item.price * item.quantity}€ </div>
+                      </li>
                     ))}
-                </ul>
-                <div className='prices'>
+                  </ul>
+                  <div className='prices'>
                     <div className='price-section'><h4>Subtotal</h4> <p>{subtotal} €</p></div>
                     <div className='price-section'><h4>Shipping and handling</h4> <p>{shipping} €</p></div>
                     <div className='price-section'><h4>Taxes</h4> <p>{taxed_price} €</p></div>
                     <hr></hr>
                     <div className='price-section'><h4>Total</h4> <p>{total} €</p></div>
+                  </div>
+                </div>
+                <div className='checkout-form'>
+                    <PaymentForm price={total}></PaymentForm>
                 </div>
             </div>
-
-            <div className='checkout-form'>
-                <PaymentForm price={total}></PaymentForm>
-            </div>
+          </main>
+          <Navegacion/>
         </div>
-        <Navegacion />
-        </main>
-        </div>
+        <div className={styles.author}> All rights reserved - Isabel Hernández Barrio</div>
+    </div>
     );
 };
 

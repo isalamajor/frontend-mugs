@@ -6,9 +6,9 @@ const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
 
-    /* Estado con los elementos del carrito */
+    /* State for items of the cart */
     const [cartItems, setCartItems] = useState(() => {
-        if (typeof window !== 'undefined') { /* Inicializa el carrito, si no había uno creado crea uno vacío, si sí, lo recupera */
+        if (typeof window !== 'undefined') { /* Get cart if it was already created */
             const savedCart = localStorage.getItem('cart');
             return savedCart ? JSON.parse(savedCart) : [];
         }
@@ -17,17 +17,17 @@ export const CartProvider = ({ children }) => {
 
     const[isMenuOpen, setIsMenuOpen] = useState(false);
 
-    /* useEffect ejecuta el código {...} cada vez de [cartItems] cambie */
+    /* Update cart in localStorage */
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            localStorage.setItem('cart', JSON.stringify(cartItems)); /* Actualizar el carrito en localStorage */
+            localStorage.setItem('cart', JSON.stringify(cartItems)); 
         }
     }, [cartItems]);
 
     const addToCart = (product) => {
-        setCartItems((prevItems) => { /* prevItems lod define automáticamente setCardItems como el conjunto de items que el carro tenía previamente */
+        setCartItems((prevItems) => { 
             const itemInCart = prevItems.find((item) => item.id === product.id);
-            /* Si el item estaba ya en el carro se suma 1 a la cantidad, sino su cantidad se setea a 1 */
+            /* Quantity is 1 if the item was not in the cart, and is prev + 1 if it was */
             if (itemInCart) {
                 return prevItems.map((item) =>
                     item.id === product.id
@@ -39,13 +39,12 @@ export const CartProvider = ({ children }) => {
         });
     };
 
+    /* 'filter' keeps only the items that do not meet the condition, therefore, the desired product is not kept but deleted */
     const removeFromCart = (productId) => {
         setCartItems((prevItems) =>
-            /* Filtra los elementos del carrito, quedándose con todos menos el que se ha seleccionado para borrar */
             prevItems.filter((item) => item.id !== productId)
         );
     };
-
     
     const clearCart = () => {
         setCartItems([]);
@@ -94,7 +93,7 @@ export const CartProvider = ({ children }) => {
     
     }
 
-    // Funciones para abrir y cerrar el menú hamburguesa del carrito
+    // To open and close the burger menu
     const toggleMenu = () => {
          if (!isMenuOpen) {setIsMenuOpen(true)} }
 
@@ -102,7 +101,7 @@ export const CartProvider = ({ children }) => {
 
 
     return (
-        /* El Provider de un Contexto define el contexto compartido (estado y funciones) a los que los componentes dentro del Provider pueden acceder */
+        /* The Provider of a Context defines the state and functions that the components inside the Provider can access */
         <CartContext.Provider
             value={{ cartItems, addToCart, removeFromCart, clearCart, lowerQuantity, increaseQuantity, changeQuantity, calculateTotal, isMenuOpen, toggleMenu, closeMenu }}
         >
