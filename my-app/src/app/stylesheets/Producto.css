@@ -3,6 +3,10 @@
     height: 28rem;
     background-color: var(--pinky);
     border-radius: 1%;
+    display: inline-block;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    position: relative;
 }
 
 .contenedor-producto:hover {
@@ -11,6 +15,17 @@
         transform: scale(1.2);
     }
     background-color: var(--darkpinky);
+
+    .btn-add-store {
+        visibility: visible;
+        opacity: 1;
+    }
+    pointer-events: auto;
+    
+}
+
+.contenedor-producto .btn-add-store:hover {
+    pointer-events: all; /* Prioriza el botón sobre otros elementos */
 }
 
 .contenedor-texto {
@@ -25,11 +40,17 @@
 }
 
 .contenedor-imagen {
+    position: relative;
     overflow: hidden;
     width: 100%;
     height: 65%;
     border-top-left-radius: 1%;
     border-top-right-radius: 1%;
+    transition: transform 0.3s ease; /* Agrega una animación suave */
+}
+
+.contenedor-producto:hover .imagen-producto {
+    transform: scale(1.1); /* Amplía la imagen ligeramente al pasar el cursor */
 }
 
 .imagen-producto {
@@ -39,7 +60,7 @@
     transition: transform 0.3s ease;
 }
 
-h2 {
+.mug-name{
     font-size: 1.2rem;
     color:  var(--darkpinky); 
     text-shadow: 
@@ -57,4 +78,49 @@ h2 {
 
 .descripcion-producto {
     font-size: 0.9rem;
+}
+
+.btn-add-store {
+    background-color: var(--yellowy);
+    color: var(--darkpinky);
+    padding: 0.6rem 0.3rem;
+    border-bottom-left-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 0.5rem;
+    user-select: none;
+    width: 30%;
+    height: auto;
+
+    position: absolute;
+    top: 0%; /* Cambiado a top para un posicionamiento más estable */
+    left: 70%;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 10; /* Asegura que el botón esté encima del resto */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.contenedor-producto:hover .btn-add-store {
+    visibility: visible;
+    opacity: 1;
+}
+
+.btn-add-store:hover{
+    background-color: var(--darkyellowy);
+    color: var(--darkpinky);
+
+}
+
+.btn-add-store:active {
+    background-color: var(--pinky);
+    color: var(--yellowy);
+    .icon-cart {
+        color: var(--yellowy);
+    }
+}
+
+.icon-cart {
+    color: var(--darkpinky);
 }

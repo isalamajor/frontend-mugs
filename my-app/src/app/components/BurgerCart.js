@@ -1,58 +1,78 @@
+// BurgerCart.js
 "use client";
 import { useCart } from '@/app/context/ContextoCarrito';
-import { useState } from 'react';
-import { slide as Menu } from 'react-burger-menu';
-import '../stylesheets/BurgerCart.css';
-import { FaRegTrashAlt } from "react-icons/fa";
-import { FaPlus, FaMinus  } from "react-icons/fa6";
+import { FaRegTrashAlt, FaPlus, FaMinus } from 'react-icons/fa';
 import Link from "next/link";
 import Image from 'next/image';
+import '../stylesheets/BurgerCart.css';
+import { useEffect, useRef } from 'react';
 
-/* npm install react-burger-menu@^2.9.2 --save */
+function BurgerCart() {
+  const { cartItems, removeFromCart, clearCart, isMenuOpen, closeMenu, calculateTotal, increaseQuantity, lowerQuantity } = useCart();
+  const menuRef = useRef(null); // Referencia al menú
 
-function BurgerCart(props) {
-    const { cartItems, removeFromCart, clearCart, lowerQuantity, increaseQuantity, changeQuantity } = useCart();
-    const [isOpen, setIsOpen] = useState(false);
+  const subtotal = calculateTotal();
 
-    const handleToggleMenu = () => {
-        setIsOpen(!isOpen); // Alterna el estado del menú al hacer clic en el icono
+  // Controla el comportamiento de la clase de apertura/cierre del menú
+  useEffect(() => {
+    const cartMenu = menuRef.current;
+    if (isMenuOpen) {
+      cartMenu.classList.add('open');
+    } else {
+      cartMenu.classList.remove('open');
+    }
+  }, [isMenuOpen]);
+
+  // Cierra el menú si se hace clic fuera de él
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        closeMenu();
+      }
     };
 
-    return (
-        <div>
-        <img src='/shopping-cart.svg' alt='cart' onClick={handleToggleMenu}></img>
-        <Menu isOpen={isOpen} right customBurgerIcon={false} className='burger-cart'>
-            <h1>Your cart</h1>
-            <ul>
-                {cartItems.map((item) => (
-                    <li className='cart-item-with-pic' key={item.id}>
-                        <div><Image
-                        className="item-pic"
-                        src={`/img/${item.pic}`}
-                        alt={item.name}
-                        width={50}
-                        height={50}
-                        /></div>
-                        <div className='cart-item'>
-                            <div className='item-price'>{item.name} - {item.price}€ </div>
-                            <div className='item-operations'>
-                                <div className='plus-minus'>
-                                    <div className='plus-minus-container'><FaPlus onClick={() => increaseQuantity(item.id)} className='plus-minus-btn'/></div>
-                                    <div className='plus-minus-num'>{item.quantity} </div>
-                                    <div className='plus-minus-container'><FaMinus onClick={() => lowerQuantity(item.id)} className='plus-minus-btn'/></div>
-                                </div>   
-                                <div className='delete-btn-container'><FaRegTrashAlt onClick={() => removeFromCart(item.id)} className='delete-btn'></FaRegTrashAlt></div>
-                            </div>
-                        </div>
-                    </li>
-                ))}
-                {cartItems.length === 0 && <p>Nothing here...</p>}
-            </ul>
-            <div onClick={clearCart} className='empty-cart'>Empty cart</div>
-            <Link href="/carrito" rel="noopener noreferrer" className='empty-cart check-out'> Check out →</Link>
-        </Menu>
-        </div>
-    );
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [closeMenu]);
+
+  return (
+    <>
+      <div className="cart-menu" ref={menuRef}>
+        <h1 className="cart-header">Your order</h1>
+        <ul className="cart-items">
+          {cartItems.map((item) => (
+            <li className='item-container' key={item.id}>
+              <Image className="burger-item-pic" src={`/img/${item.pic}`} alt={item.name} width={50} height={50} />
+              <div className='cart-item'>
+                <div className='item-price'>{item.name} - {item.price}€</div>
+                <div className='item-operations'>
+                    <div className='plus-minus-container'>
+                        <FaPlus onClick={() => increaseQuantity(item.id)} className='left plus-minus-btn' />
+                        <span className='plus-minus-num'>{item.quantity}</span>
+                        <FaMinus onClick={() => lowerQuantity(item.id)} className='plus-minus-btn right' />
+                    </div>
+                  <div className="delete-btn-container">
+                    <FaRegTrashAlt onClick={() => removeFromCart(item.id)} className='delete-btn' />
+                  </div>
+                </div>
+              </div>
+            </li>
+          ))}
+          <hr></hr>
+          <div className='price-section'><h4>Subtotal</h4> <p>{subtotal} €</p></div>
+          {cartItems.length === 0 && <p>Nothing here...</p>}
+        </ul>
+        <div onClick={clearCart} className='empty-cart cart-btn'>Empty cart</div>
+        {cartItems.length > 0 
+          ? <Link href="/carrito" rel="noopener noreferrer" className='cart-btn'>Check out →</Link>
+          : <p className='cart-btn'>CheckOut</p>
+        }
+      </div>
+    </>
+  );
 }
 
 export default BurgerCart;

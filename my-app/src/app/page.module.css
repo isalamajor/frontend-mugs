@@ -15,9 +15,6 @@
   gap: 64px;
 }
 
-.headerlogo {
-  width: 12rem;
-}
 
 @media (prefers-color-scheme: dark) {
   .page {
@@ -160,3 +157,25 @@ a.secondary {
   column-gap: 2rem;
   row-gap: 3rem;
 }
+
+.icon-burger {
+  margin-left: auto;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  position: relative;
+}
+
+.headerlogo {
+  width: 12rem;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+
+}
+

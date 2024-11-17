@@ -14,14 +14,13 @@ export default function Home() {
     const { name } = useParams();
     const product_name = decodeURIComponent(name);
     const producto = lista_productos.find(producto => producto.name === product_name);
-    const { addToCart } = useCart();
+    const { addToCart, toggleMenu } = useCart();
     
 
     return (
       <div className="outer-container">
         
-        <BurgerCart pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }
-        ></BurgerCart>
+        <BurgerCart></BurgerCart>
 
         <div className="page-wrap">
         <div className={`${styles.page} `} >
@@ -41,7 +40,7 @@ export default function Home() {
               <div className="contenedor-taza">
                 <div className="imagenes-tazas">
                   <MySlider
-                  producto={product_name}>
+                  producto={producto}>
                   </MySlider>
 
                   <Image
@@ -56,7 +55,7 @@ export default function Home() {
                 <div className="contenedor-texto-taza">
                   <div>{producto.long_description}</div>
                   <p className="precio-taza">{producto.price} €</p>
-                  <div className="btn-add" onClick={() => addToCart(producto)}>
+                  <div className="btn-add" onClick={() => {addToCart(producto); toggleMenu();}}>
                     <div>Add to</div> 
                     <div>
                       <Image

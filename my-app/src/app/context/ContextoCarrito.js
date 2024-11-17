@@ -15,6 +15,8 @@ export const CartProvider = ({ children }) => {
         return [];
     });
 
+    const[isMenuOpen, setIsMenuOpen] = useState(false);
+
     /* useEffect ejecuta el código {...} cada vez de [cartItems] cambie */
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -65,7 +67,6 @@ export const CartProvider = ({ children }) => {
         });
     };
 
-
     const increaseQuantity = (productId) => {
         setCartItems((prevItems) => {
             return prevItems.map((item) =>
@@ -93,10 +94,17 @@ export const CartProvider = ({ children }) => {
     
     }
 
+    // Funciones para abrir y cerrar el menú hamburguesa del carrito
+    const toggleMenu = () => {
+         if (!isMenuOpen) {setIsMenuOpen(true)} }
+
+    const closeMenu = () => setIsMenuOpen(false);
+
+
     return (
         /* El Provider de un Contexto define el contexto compartido (estado y funciones) a los que los componentes dentro del Provider pueden acceder */
         <CartContext.Provider
-            value={{ cartItems, addToCart, removeFromCart, clearCart, lowerQuantity, increaseQuantity, changeQuantity, calculateTotal }}
+            value={{ cartItems, addToCart, removeFromCart, clearCart, lowerQuantity, increaseQuantity, changeQuantity, calculateTotal, isMenuOpen, toggleMenu, closeMenu }}
         >
             {children}
         </CartContext.Provider>

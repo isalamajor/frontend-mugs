@@ -2,6 +2,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { CartProvider } from './context/ContextoCarrito';
 
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",

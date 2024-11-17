@@ -80,3 +80,8 @@ h2 {
     font-size: 0.9rem;
 }
 
+.outer-container {
+    display: flex;
+    flex-direction: row;
+}
+

@@ -23,8 +23,9 @@ export default function Home() {
 
         <main className={styles.main}>
         <Navegacion />
+        <div className='grid'>
             <div className='summary-container'>
-                <h2>Summary</h2>
+                <h2 className='title-summary'>Summary</h2>
                 <ul>
                     {cartItems.map((item) => (
                         <li className='cart-item-with-pic' key={item.id}>
@@ -51,6 +52,7 @@ export default function Home() {
             <div className='checkout-form'>
                 <PaymentForm price={total}></PaymentForm>
             </div>
+        </div>
         <Navegacion />
         </main>
         </div>

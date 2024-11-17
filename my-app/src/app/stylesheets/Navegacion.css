@@ -18,3 +18,18 @@ gap: 8px;
 .navegacion img {
 flex-shrink: 0;
 }
+
+.cart-opener {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cart-opener:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.cart-icon {
+  color: gray; }
+

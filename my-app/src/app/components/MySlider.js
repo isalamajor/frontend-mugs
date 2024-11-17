@@ -38,8 +38,7 @@ const CustomArrow = ({ direction, onClick }) => {
 
 
 function MySlider(props) {
-
-
+  const productos_slider = lista_productos.filter(elem => elem !== props.producto);
   const settings = {
     dots: false,
     infinite: true,
@@ -67,7 +66,7 @@ function MySlider(props) {
 
   return (
     <Slider {...settings} className="contenedor-slider" >
-        {lista_productos.map((product) => (
+        {productos_slider.map((product) => (
             <Link className='sugerido 'key={product.name} href={`/productos/${encodeURIComponent(product.name)}`}>
                 <Image
                 src={`/img/${product.pic}`}
