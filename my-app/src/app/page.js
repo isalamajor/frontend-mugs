@@ -39,9 +39,9 @@ export default function Home() {
         </main>
         
         <Navegacion></Navegacion>
-      
+
       </div>
       <div className={styles.author}> All rights reserved - Isabel Hernández Barrio</div>
-      </div>  
+    </div>  
   );
 }
