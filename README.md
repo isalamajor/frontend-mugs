@@ -4,4 +4,4 @@ npm run build
 
 npm run dev  
 
-Vercel deploy in here: https://frontend-mugs-1-git-master-isalamajors-projects.vercel.app/
+Vercel deploy in here: https://frontend-mugs-z.vercel.app/
